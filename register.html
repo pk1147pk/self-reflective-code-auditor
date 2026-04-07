@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<style>
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+}
+
+/* 2. Registration Card */
+.container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 380px; /* Thoda wide rakha hai inputs ke liye */
+}
+
+h2 {
+    color: #5b70e6;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* 3. Inputs ki styling */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    box-sizing: border-box; 
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #66a6ff;
+    box-shadow: 0 0 8px rgba(102, 166, 255, 0.2);
+}
+
+/* 4. Creative Register Button */
+button {
+    background: linear-gradient(to right, #4CAF50, #0db282);
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 15px rgba(13, 178, 130, 0.4);
+}
+
+/* Back to Login link */
+.login-link {
+    display: block;
+    margin-top: 15px;
+    color: #66a6ff;
+    text-decoration: none;
+    font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+
+    <form action="/register" method="post">
+        <!-- Name Field -->
+        <input type="text" name="name" placeholder="Full Name" required>
+        
+        <!-- Email Field -->
+        <input type="email" name="email" placeholder="Email Address" required>
+        
+        <!-- Mobile No Field -->
+        <input type="tel" name="mobile" placeholder="Mobile Number" required>
+        
+        <!-- Address Field -->
+        <input type="text" name="address" placeholder="Home Address" required>
+        
+        <!-- Password Field -->
+        <input type="password" name="password" placeholder="Create Password" required>
+
+        <button type="submit">Register Now</button>
+    </form>
+
+    <a href="/login" class="login-link">Already have an account? Login</a>
+</div>
+
+</body>
+</html>

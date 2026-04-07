@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Code Auditor Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<style>
+body {
+    font-family: Arial , sans-serif;
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    width: 80%;
+    max-width: 900px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+}
+
+textarea {
+ width: 90%;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #667eea;
+}
+
+button {
+     background: linear-gradient(to right, #ff512f, #dd2476);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+
+}
+
+button:hover {
+    background: #45a049;
+     
+}
+
+#output {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    background: #f4f6f8;
+}
+
+.issue {
+    color: red;
+    font-weight: bold;
+}
+
+.good {
+    color: green;
+    font-weight: bold;
+}
+
+.score {
+    font-size: 20px;
+    color: #0066cc;
+}
+</style>
+<script>
+async function analyzeCode() {
+    let code = document.getElementById("code").value;
+
+    let response = await fetch("/analyze", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({code: code})
+    });
+
+    let result = await response.json();
+
+    let outputHTML = "";
+
+    outputHTML += `<div class="score">⭐ Score: ${result.score}</div><br>`;
+
+    if(result.issues.length === 0){
+        outputHTML += `<div class="good">✅ Excellent! No Issues Found 🎉</div>`;
+    } else {
+        outputHTML += `<div class="issue">⚠ Issues Found:</div><ul>`;
+        result.issues.forEach(i => {
+            outputHTML += `<li class="issue">${i}</li>`;
+        });
+        outputHTML += "</ul>";
+    }
+
+    document.getElementById("output").innerHTML = outputHTML;
+}
+</script>
+</head>
+<body>
+
+<div class="container">
+
+<h2>💻 Self-Reflective Code Auditor</h2>
+
+<textarea id="code" rows="15" placeholder="Paste your code here..."></textarea>
+
+<br>
+<button onclick="analyzeCode()">🔍 Analyze Code</button>
+
+<div id="output"></div>
+
+</div>
+
+</body>
+</html>
